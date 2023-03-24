@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--viewport-fit=coverでiOSで表示したときに左右めいっぱいに表示される-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        <!-- iOS/Safari用 -->
+      <meta name="apple-mobile-web-app-capable" content="yes">
+  
+       <!-- Android/Chrome用 -->
+      <meta name="mobile-web-app-capable" content="yes">
+      <meta name="description" content="誰でも円滑にコレコレさんに凸ができるように必要最低限の情報整理を手助けします。">
+      <meta property="og:image" content="card.png">
+    <title>KoreSheet</title>
+
+    <link rel ="stylesheet" href="style.css">
+
+    <link rel="apple-touch-icon" type="image/png" href="icon.png">
+    <link rel="icon" type="image/png" href="icon.png">
+</head>
+<body >
+    <div class="background-image" >
+      <header >
+        <nav>
+          <ul id="top">
+            <li><a href="#">HOME</a></li>
+            <li><a href="#">KORESHEET</a></li>
+            <li><a href="#">KORENDAR</a></li>
+          </ul>
+        </nav>
+      </header>
+  
+      <div class="title" >
+        KORE<br>SHEET
+      </div>
+
+      
+        <a href="https://mitarashimochi2.github.io/KoreSheet_old/" class="design">
+           <div class="subtitle">旧デザインに切り替える</div> </a>
+
+          <div class="wrap">
+           <div class="title2">相談前の確認</div>
+           <div class="subtitle2">その話は自分に関係があるか<br>(暴露を除く)<br>証拠が1つでもあるか<br>回線は良好か</div>
+
+           <div class="title2">内容入力</div>
+           <div class="subtitle2">
+            <div class="list">名前</div>
+
+            
+              <label>
+                <input type="text" id="name">
+              </label>
+            
+              <form name="form1">
+                <p>性別</p>
+                    <label><input type="radio" class="radio" value="男性" name="radio">男性</label>
+                    <label><input type="radio" class="radio" value="女性" name="radio">女性</label>
+                </form>
+
+                <p>年齢</p>
+                <label><input type="number" id="age"></label>
+                <p>関係人数</p>
+                <label><input type="number" id="member"></label>
+                <p>コレコレにして欲しいこと</p>
+                <label><textarea type="text" id="want" rows="2"></textarea></label>
+                <p>詳しい説明</p>
+                <label><textarea type="text" id="explain" rows="20"></textarea></label>
+               
+                <p>補足</p>
+                <label><textarea type="text" id="hosoku" rows="4"></textarea></label>
+
+                <button  type="button" class="done" onclick="clickBtn1()"> <a href="#sheet"> 完了</a></button>
+              </div>
+            
+           </div>
+           <script>
+            function clickBtn1() {
+              const t1 = document.getElementById("name").value;
+              document.getElementById("span1").textContent = t1;
+    
+              const t2 = document.getElementById("age").value;
+              document.getElementById("span2").textContent = t2;
+    
+              const t3 = document.getElementById("member").value;
+              document.getElementById("span3").textContent = t3;
+    
+              const t4 = document.getElementById("explain").value;
+              document.getElementById("span4").textContent = t4;
+    
+              const t5 = document.getElementById("hosoku").value;
+              document.getElementById("span5").textContent = t5;
+    
+              const t6 = document.getElementById("want").value;
+              document.getElementById("span6").textContent = t6;
+    
+              let str = "";
+              const radio = document.form1.radio;
+    
+                for (let i = 0; i < radio.length; i++) {
+                    if (radio[i].checked) {//(color1[i].checked === true)と同じ
+                    str = radio[i].value;
+                break;
+                    }
+                }
+               document.getElementById("span7").textContent = str;
+
+               const urlEncodedStr = encodeURIComponent("こんにちは！DM失礼します。" + "\n" + "\n" +"🔹端的にして欲しいこと：" + t6 + "\n" + "🔹名前：" + t1 + "\n" + "🔹性別：" + str + "\n" + "🔹年齢：" + t2 + "\n" + "🔹関係人数：" + t3 +  "\n" + "\n" + "🔹詳しい説明："+ "\n"  + t4 + "\n" + "\n" + "🔹補足説明：" + "\n" + t5 + "\n" + "\n" + "よろしくお願いします。(この相談はKoreSheetによって作成されました。)");
+               const hrefStr = "https://twitter.com/messages/compose?recipient_id=102806852&text=" + urlEncodedStr;
+               document.getElementById("sendLink").href = hrefStr;
+         }
+            
+         const elem = document.documentElement;
+if (elem.requestFullscreen) {
+  elem.requestFullscreen();
+}
+
+          </script>
+           
+          <div class="title2" id="sheet">シート</div>
+          <div class="subtitle2">
+
+            <span id="span6"></span>
+            
+            <div class="text">
+              名前：<span id="span1"></span>
+             </div>
+      
+             <div class="text">
+              性別：<span id="span7"></span>
+             </div>
+      
+             <div class="text">
+              年齢：<span id="span2"></span>歳
+             </div>
+      
+             <div class="text">
+              関係人数：<span id="span3"></span>人
+             </div>
+      
+             <div class="text">
+              相談内容：<br><span id="span4"></span>
+             </div>
+      
+             <div class="text">
+              補足： <br><span id="span5"></span>
+             </div>
+
+
+             <a  class="send" id="sendLink">コレコレに送信</a>
+          </div>
+          <div class="title2">最終確認</div>
+          <div class="subtitle2">事前に配信を切っておくこと<br>通話では失礼な態度を取らない<br>ボイチェンを使わない
+            <br>ヘラヘラ笑いながら喋らない
+          </div>
+
+          <div class="title2">このテンプレートを作った人</div>
+          <div class="subtitle2">
+            <div class="wp-block-sgb-tab-item post-tab__content tab1 tab-active">
+              <div class="twitter-timeline twitter-timeline-rendered" style="display: flex; max-width: 100%; margin-top: 0px; margin-bottom: 0px;"><iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" class="" style="position: static; visibility: visible; width: 345px; height: 600px; display: block; flex-grow: 1;" title="Twitter Timeline" src="https://syndication.twitter.com/srv/timeline-profile/screen-name/Mitarashimochi2?dnt=false&amp;embedId=twitter-widget-0&amp;features=eyJ0ZndfdGltZWxpbmVfbGlzdCI6eyJidWNrZXQiOltdLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X2ZvbGxvd2VyX2NvdW50X3N1bnNldCI6eyJidWNrZXQiOnRydWUsInZlcnNpb24iOm51bGx9LCJ0ZndfdHdlZXRfZWRpdF9iYWNrZW5kIjp7ImJ1Y2tldCI6Im9uIiwidmVyc2lvbiI6bnVsbH0sInRmd19yZWZzcmNfc2Vzc2lvbiI6eyJidWNrZXQiOiJvbiIsInZlcnNpb24iOm51bGx9LCJ0ZndfbWl4ZWRfbWVkaWFfMTU4OTciOnsiYnVja2V0IjoidHJlYXRtZW50IiwidmVyc2lvbiI6bnVsbH0sInRmd19leHBlcmltZW50c19jb29raWVfZXhwaXJhdGlvbiI6eyJidWNrZXQiOjEyMDk2MDAsInZlcnNpb24iOm51bGx9LCJ0ZndfZHVwbGljYXRlX3NjcmliZXNfdG9fc2V0dGluZ3MiOnsiYnVja2V0Ijoib24iLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X3ZpZGVvX2hsc19keW5hbWljX21hbmlmZXN0c18xNTA4MiI6eyJidWNrZXQiOiJ0cnVlX2JpdHJhdGUiLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X2xlZ2FjeV90aW1lbGluZV9zdW5zZXQiOnsiYnVja2V0Ijp0cnVlLCJ2ZXJzaW9uIjpudWxsfSwidGZ3X3R3ZWV0X2VkaXRfZnJvbnRlbmQiOnsiYnVja2V0Ijoib24iLCJ2ZXJzaW9uIjpudWxsfX0%3D&amp;frame=false&amp;hideBorder=false&amp;hideFooter=true&amp;hideHeader=true&amp;hideScrollBar=false&amp;lang=ja&amp;maxHeight=600px&amp;origin=https%3A%2F%2Fkoretan.net%2F&amp;sessionId=bde753be8c56e13e5caad15158ef2f7d65744e08&amp;showHeader=false&amp;showReplies=false&amp;siteScreenName=korekore19&amp;transparent=false&amp;widgetsVersion=aaf4084522e3a%3A1674595607486"></iframe></div> <script async="" src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+              </div>
+          </div>
+
+          <div class="footer">KoreSheet v2</div>
+
+          <a  href="#top" >
+            <div class="top" >
+               <img src="arrow.png" class="img">
+            </div>
+           </a>
+          
+
+          
+          </div>
+    </div>
+      
+
+  </body>
+  
+</html>
